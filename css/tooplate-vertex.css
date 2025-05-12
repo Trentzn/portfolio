@@ -672,12 +672,16 @@ figure.effect-goliath:hover p {
         height: 100px;
     }
 }
-/* Make tm-section single-column full-width */
+
 .tm-section.single-column {
     display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 .tm-section.single-column .tm-section-col {
-    width: 100%;
-    flex: 0 0 100%;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
 }
