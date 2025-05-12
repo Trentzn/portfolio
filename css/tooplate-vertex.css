@@ -236,9 +236,12 @@ span, footer {  line-height: 1.8; }
 }
 
 .tm-content {
-    padding: 180px 60px 70px 100px;
+    padding: 100px 40px 70px 40px; /* Equal left/right padding */
     box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
 }
+
 
 .tm-content-small { padding: 190px 120px 70px; }
 .tm-content-small-top { padding-top: 130px; }
@@ -588,12 +591,6 @@ figure.effect-goliath:hover p {
     }
 
     .navbar-toggler:hover { color: #99CC99; }
-
-    .tm-content {
-        padding-left: 20px;
-        padding-right: 20px;
-        padding: 50px 20px;
-    }
 
     .tm-copyright { margin-left: 15px; }
 }
