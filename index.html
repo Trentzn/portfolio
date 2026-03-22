@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trenton Horner | Cybersecurity Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
+    
+    <div id="terminal" class="terminal-container">
+        <header class="terminal-header">
+            <div class="header-left">T. HORNER - CYBERSECURITY PORTFOLIO</div>
+            <div class="header-right">ROBCO TERMLINK V7.1.0</div>
+        </header>
+
+        <nav class="terminal-nav">
+            <button class="nav-btn active" data-target="boot">HOME</button>
+            <button class="nav-btn" data-target="about">STAT</button>
+            <button class="nav-btn" data-target="projects">DATA</button>
+            <button class="nav-btn" data-target="gallery">IMG</button>
+            <button class="nav-btn" data-target="contact">MSG</button>
+        </nav>
+
+        <main id="content" class="terminal-content">
+            <!-- Content will be injected here -->
+            <section id="boot" class="page active">
+                <div id="home-banner" class="home-banner">
+                    <img id="profile-main" src="trenton-profile.png" alt="Trenton Horner - Professional Profile" class="profile-img">
+                    <div class="banner-text">
+                        <h1 class="main-title">TRENTON HORNER</h1>
+                        <h2 class="sub-title">CYBERSECURITY PORTFOLIO</h2>
+                    </div>
+                </div>
+                <div class="typing-container" id="boot-text"></div>
+            </section>
+        </main>
+
+        <footer class="terminal-footer">
+            <div class="footer-left">V7.1.0-USF | <button id="mute-btn" class="footer-link">SOUND: ON</button></div>
+            <div class="footer-right">SPRING 2026 GRADUATE</div>
+        </footer>
+    </div>
+
+    <div id="image-modal" class="modal">
+        <div class="modal-content">
+            <header class="terminal-header">
+                <div class="header-left">IMAGE ANALYZER V1.0</div>
+                <button id="close-modal" class="header-right footer-link">[ CLOSE ]</button>
+            </header>
+            <div class="modal-body">
+                <img id="modal-img" src="" alt="Expanded View">
+                <div id="modal-desc" class="typing-container"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
