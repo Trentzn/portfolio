@@ -15,11 +15,13 @@ PERMISSIONS GRANTED. INITIALIZING...
 > STATUS: CYBERSECURITY STUDENT & DEVELOPER
 
 WELCOME TO THE OFFICIAL ARCHIVE OF TRENTON HORNER.
-NAVIGATE VIA THE TOP TERMINAL TABS:
-- STAT: BIOGRAPHY & SYSTEM SPECS
-- DATA: MISSION LOGS & PROJECTS
-- IMG: VISUAL DATA GALLERY
-- MSG: SEND SECURE TRANSMISSION
+[ <a href="https://www.linkedin.com/in/trenton-horner" target="_blank" class="sub-link" style="text-decoration: none;">LINKEDIN: linkedin.com/in/trenton-horner</a> ]
+
+NAVIGATE VIA THE HYPERLINKS BELOW:
+- [ <button class="sub-link" data-target="about">STAT</button> ]: BIOGRAPHY & SYSTEM ARCHIVE
+- [ <button class="sub-link" data-target="projects">DATA</button> ]: MISSION LOGS & PROJECT SCHEMATICS
+- [ <button class="sub-link" data-target="gallery">IMG</button> ]: VISUAL DATA & GALLERY
+- [ <button class="sub-link" data-target="contact">MSG</button> ]: SEND SECURE TRANSMISSION
 
 SYSTEM READY. AWAITING USER INPUT._`,
     about: `[ TRENTON HORNER - PERSONNEL ARCHIVE ]
@@ -46,17 +48,6 @@ Aspiring information security professional with a genuine interest in network se
 - LANGUAGES: C, SQL, HTML, CSS, Python, KQL
 - TOOLS: Bash, Regex, SIEM (Splunk/Elastic), Wireshark, Ghidra, VMware
 
-[ FIELD PROJECTS ]
-1. CLOUD LORA-GPS (IOT TRACKER)
-   - End-to-end telemetry system for off-grid hardware.
-   - Integrated Firebase cloud and Google Maps JS API.
-2. INTRUSION DETECTION SYSTEM (SNORT)
-   - Installed and monitored real-time network traffic.
-   - Developed custom black/white list rules.
-3. PERSONAL PORTFOLIO WEBSITE (THIS TERMINAL)
-   - Fully responsive RobCo-themed interface.
-   - Deployed via GitHub Pages with custom DNS.
-
 [ PROFESSIONAL EXPERIENCE ]
 - APP TESTER & AI DATA TRAINER | UBER AI SOLUTIONS
   (OCT 2025 - JAN 2026)
@@ -67,9 +58,9 @@ Aspiring information security professional with a genuine interest in network se
   * Coordinated daily routines and support protocols.`,
     projects: `[ DATA - PROJECTS ]
 
-1. VAULT-TEC DEFENDER (Firewall Simulation)
-   - Status: ACTIVE
-   - Summary: A Python-based script simulating packet filtering.
+1. PERSONAL PORTFOLIO WEBSITE (This Terminal)
+   - Status: ACTIVE [MAY 2025 - PRESENT]
+   - Summary: A fully responsive RobCo-themed interface built with HTML/CSS/JS.
 
 2. VAULT-TEC PERSONNEL VERIFICATION (CTF Challenge)
    - Status: COMPLETED [MARCH 2026]
@@ -81,9 +72,9 @@ Aspiring information security professional with a genuine interest in network se
    - Summary: End-to-end geographic tracking with Firebase integration.
    [ <button class="sub-link" data-target="project_lora">VIEW DETAILED LOG: LORA_01</button> ]
 
-4. PIP-ARCHIVE (Encrypted Database)
-   - Status: IN PROGRESS
-   - Summary: SQLite implementation with AES-256 encryption.`,
+4. OPENCLAW (Raspberry Pi 5)
+   - Status: ACTIVE [FEBRUARY 2026 - PRESENT]
+   - Summary: Advanced open-source implementation of the Claw engine running on a Raspberry Pi 5 hardware node.`,
     project_lora: `[ TERMINAL LOG: LORA_01 ]
 PROJECT: CLOUD-CONNECTED LORA GPS TRACKING SYSTEM
 DATE: JANUARY 2026 - PRESENT
@@ -128,8 +119,8 @@ Developed a complete end-to-end IoT geographic tracking system. Utilizes LoRa (L
     contact: `[ MSG - CONTACT ]
 > SEND TRANSMISSION TO T. HORNER
 
-EMAIL: horner.t@usf.edu
-LINKEDIN: linkedin.com/in/trenton-horner
+EMAIL: <a href="mailto:trentonhorner@usf.edu" class="sub-link" style="text-decoration: none;">trentonhorner@usf.edu</a>
+LINKEDIN: <a href="https://www.linkedin.com/in/trenton-horner" target="_blank" class="sub-link" style="text-decoration: none;">www.linkedin.com/in/trenton-horner</a>
 LOCATION: TAMPA, FL (VAULT 813)
 
 > INPUT MESSAGE:_`
