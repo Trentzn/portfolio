@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault-Tec | OVERRIDE SUCCESS</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .flag-text {
+            font-weight: bold;
+            background-color: var(--fallout-green);
+            color: var(--fallout-bg);
+            padding: 2px 8px;
+            display: inline-block;
+            margin-top: 10px;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.8; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
+    <div class="terminal-scratches"></div>
+    
+    <div id="terminal" class="terminal-container">
+        <div class="terminal-underlay">
+            <div class="layer-dirt"></div>
+            <div class="layer-watermark"></div>
+        </div>
+        <header class="terminal-header">
+            <div class="header-left">VAULT-TEC SECURE NET</div>
+            <div class="header-right">LEVEL 5 ACCESS</div>
+        </header>
+
+        <main id="content" class="terminal-content">
+            <section class="page active">
+                <div class="typing-container" style="white-space: pre-wrap; line-height: 1.4; font-size: 1.2rem;">WELCOME, AUDITOR.
+VERIFICATION SUCCESSFUL.
+***[LEVEL 5 ACCESS GRANTED]***
+
+The Vault-Tec server congratulates you on your cybersecurity proficiency. Please document your methods for potential future deployment. 
+
+Your unique flag identifier is:
+<span class="flag-text">VT_FLAG{CODE_ANALYSIS_101}</span>
+
+<br><br>
+[ <a href="index.html" class="ctf-link">RETURN TO MAIN ARCHIVE</a> ]</div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

@@ -9,8 +9,14 @@
 <body>
     <div class="crt-overlay"></div>
     <div class="scanlines"></div>
+    <div class="terminal-scratches"></div>
     
     <div id="terminal" class="terminal-container">
+        <div class="terminal-underlay">
+            <div class="layer-dirt"></div>
+            <div id="data-stream" class="layer-data-stream"></div>
+            <div class="layer-watermark"></div>
+        </div>
         <header class="terminal-header">
             <div class="header-left">T. HORNER - CYBERSECURITY PORTFOLIO</div>
             <div class="header-right">ROBCO TERMLINK V7.1.0</div>
@@ -18,10 +24,11 @@
 
         <nav class="terminal-nav">
             <button class="nav-btn active" data-target="boot">HOME</button>
-            <button class="nav-btn" data-target="about">STAT</button>
-            <button class="nav-btn" data-target="projects">DATA</button>
-            <button class="nav-btn" data-target="gallery">IMG</button>
-            <button class="nav-btn" data-target="contact">MSG</button>
+            <button class="nav-btn" data-target="about"><img src="icon_stat.png" class="nav-icon">STAT</button>
+            <button class="nav-btn" data-target="projects"><img src="icon_data.png" class="nav-icon">DATA</button>
+            <button class="nav-btn" data-target="gallery"><img src="icon_img.png" class="nav-icon">IMG</button>
+            <button class="nav-btn" data-target="contact"><img src="icon_msg.png" class="nav-icon">MSG</button>
+            <a href="login.html" class="nav-btn" style="text-decoration: none; color: var(--fallout-green);"><img src="icon_login.png" class="nav-icon">LOGIN</a>
         </nav>
 
         <main id="content" class="terminal-content">
@@ -40,6 +47,7 @@
 
         <footer class="terminal-footer">
             <div class="footer-left">V7.1.0-USF | <button id="mute-btn" class="footer-link">SOUND: ON</button></div>
+            <div class="footer-middle">RADS: 18.5 mSv/h | VAULT 111-B</div>
             <div class="footer-right">SPRING 2026 GRADUATE</div>
         </footer>
     </div>

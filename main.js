@@ -1,7 +1,12 @@
 const contentData = {
-    boot: `***************************************************
-*  ROBCO INDUSTRIES (TM) TERMLINK PROTOCOL 7.1.0  *
-*          TRENTON HORNER - PERSONAL PORTFOLIO    *
+    boot: `WELCOME TO ROBCO INDUSTRIES (TM) TERMLINK
+> SET USER_PERMISSIONS = ADMIN
+PERMISSIONS GRANTED. INITIALIZING...
+
+***************************************************
+*          TRENTON HORNER - PERSONAL ARCHIVE      *
+*          GRADUATION: SPRING 2026                 *
+*          STATUS: ONLINE                          *
 ***************************************************
 
 > INITIALIZING BOOT SEQUENCE...
@@ -66,9 +71,10 @@ Aspiring information security professional with a genuine interest in network se
    - Status: ACTIVE
    - Summary: A Python-based script simulating packet filtering.
 
-2. GHOUL-NET SCANNER (Nmap Wrapper)
-   - Status: COMPLETED
-   - Summary: Automated security auditing tool.
+2. VAULT-TEC PERSONNEL VERIFICATION (CTF Challenge)
+   - Status: COMPLETED [MARCH 2026]
+   - Summary: Simulated RobCo network intrusion via Source Code Analysis.
+   [ <a href="login.html" class="sub-link" style="text-decoration: none;">INITIATE VERIFICATION PROTOCOL</a> ]
 
 3. CLOUD LORA-GPS (IoT Tracker)
    - Status: IN PROGRESS [JAN 2026 - PRESENT]
@@ -304,6 +310,32 @@ const imageMap = {
     'img5.jpg': 'GATEWAY BASE - Meshtastic Base Station Alpha. Serving as the primary node for Tampa-area mesh communication.',
     'img6.png': 'LIVE MAP DATA - Real-time LoRa tracking overlay. Captured near USF campus, showing 100% signal reliability.'
 };
+
+function updateDataStream() {
+    const stream = document.getElementById('data-stream');
+    if (!stream) return;
+    
+    let hex = '';
+    const lines = 100;
+    const chars = 30;
+    
+    for (let i = 0; i < lines; i++) {
+        let line = '0x' + Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase().padStart(4, '0') + ' ';
+        for (let j = 0; j < chars / 4; j++) {
+            line += Math.floor(Math.random() * 0xFFFFFFFF).toString(16).toUpperCase().padStart(8, '0') + ' ';
+        }
+        hex += line + '\n';
+    }
+    
+    // Create a double column for smooth looping animation
+    stream.innerHTML = `<div class="data-scroll">${hex}${hex}</div>`;
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    switchPage('boot');
+    updateDataStream();
+});
 
 document.addEventListener('click', (e) => {
     // Modal Expansion logic
