@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trenton Horner | HPC Systems Administrator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="shell">
+        <header id="top-bar">
+            <div class="top-bar-left">T. HORNER — HPC SYSTEMS ADMINISTRATOR I // USF</div>
+            <div class="top-bar-right">
+                <button id="mute-btn" aria-label="Toggle sound">🔊</button>
+                <span id="clock">--:--</span>
+            </div>
+        </header>
+
+        <div id="desktop">
+            <div id="wordmark">
+                <div class="wordmark-title">TRENTON HORNER</div>
+                <div class="wordmark-sub">HPC Systems Administrator I &middot; University of South Florida</div>
+            </div>
+
+            <div id="desktop-icons">
+                <button class="desktop-icon" type="button">
+                    <span class="desktop-icon-glyph">
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="6" width="24" height="16" rx="1" fill="#c0c0c0" stroke="#000000" stroke-width="1"/>
+                            <rect x="6" y="8" width="20" height="11" fill="#3a6ea5"/>
+                            <rect x="12" y="24" width="8" height="3" fill="#c0c0c0" stroke="#000000" stroke-width="1"/>
+                            <rect x="9" y="27" width="14" height="2" fill="#808080"/>
+                        </svg>
+                    </span>
+                    <span class="desktop-icon-label">My Computer</span>
+                </button>
+                <button class="desktop-icon" type="button">
+                    <span class="desktop-icon-glyph">
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="7" y="8" width="18" height="3" fill="#3a3a3a"/>
+                            <rect x="13" y="4" width="6" height="4" fill="#3a3a3a"/>
+                            <path d="M9 11h14l-1.5 16a2 2 0 0 1-2 1.8h-7a2 2 0 0 1-2-1.8L9 11z" fill="#e8e8e8" stroke="#000000" stroke-width="1"/>
+                            <path d="M13 13l1 12M16 13v12M19 13l-1 12" stroke="#3a6ea5" stroke-width="1.2" fill="none"/>
+                        </svg>
+                    </span>
+                    <span class="desktop-icon-label">Recycle Bin</span>
+                </button>
+                <button class="desktop-icon" type="button">
+                    <span class="desktop-icon-glyph">
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9c0-1.1.9-2 2-2h7l3 3h12c1.1 0 2 .9 2 2v11c0 1.1-.9 2-2 2H5c-1.1 0-2-.9-2-2V9z" fill="#ffd257" stroke="#8a6400" stroke-width="1.2"/>
+                            <rect x="11" y="12" width="12" height="14" fill="#ffffff" stroke="#666666" stroke-width="1"/>
+                            <rect x="13" y="15" width="8" height="1.4" fill="#999999"/>
+                            <rect x="13" y="18" width="8" height="1.4" fill="#999999"/>
+                            <rect x="13" y="21" width="5" height="1.4" fill="#999999"/>
+                        </svg>
+                    </span>
+                    <span class="desktop-icon-label">My Documents</span>
+                </button>
+                <button class="desktop-icon" type="button">
+                    <span class="desktop-icon-glyph">
+                        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="4" y="6" width="10" height="7" rx="1" fill="#c0c0c0" stroke="#000000" stroke-width="1"/>
+                            <rect x="18" y="6" width="10" height="7" rx="1" fill="#c0c0c0" stroke="#000000" stroke-width="1"/>
+                            <rect x="11" y="17" width="10" height="7" rx="1" fill="#c0c0c0" stroke="#000000" stroke-width="1"/>
+                            <path d="M9 13v3h14v-3M16 20v-4" stroke="#3a6ea5" stroke-width="1.2" fill="none"/>
+                        </svg>
+                    </span>
+                    <span class="desktop-icon-label">Network</span>
+                </button>
+            </div>
+
+            <div id="windows-root"></div>
+
+            <div id="desk-buddy">
+                <div class="buddy-bubble is-hidden" id="buddy-bubble">
+                    <button class="win-btn buddy-bubble-close" id="buddy-bubble-close" aria-label="Dismiss tip">×</button>
+                    <p id="buddy-tip-text">Click me for a tip!</p>
+                </div>
+                <div class="buddy-char" id="buddy-char" role="button" tabindex="0" aria-label="Desktop buddy, click for a tip">
+                    <svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="14" y="6" width="24" height="70" rx="12" fill="none" stroke="#9aa7b8" stroke-width="5"/>
+                        <rect x="20" y="18" width="12" height="52" rx="6" fill="none" stroke="#9aa7b8" stroke-width="4"/>
+                        <ellipse cx="21" cy="16" rx="4" ry="5" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+                        <ellipse cx="33" cy="16" rx="4" ry="5" fill="#ffffff" stroke="#333333" stroke-width="1"/>
+                        <circle cx="22" cy="17" r="1.8" fill="#000000"/>
+                        <circle cx="34" cy="17" r="1.8" fill="#000000"/>
+                    </svg>
+                </div>
+            </div>
+
+            <div id="best-viewed-badge">BEST VIEWED AT<br>1024&times;768</div>
+        </div>
+
+        <nav id="icon-bar"></nav>
+    </div>
+
+    <div id="lightbox-backdrop" class="win-hidden"></div>
+    <div id="lightbox" class="win98-window lightbox-window win-hidden">
+        <div class="win-titlebar">
+            <span class="win-title-text">Image_Viewer.exe</span>
+            <div class="win-controls">
+                <button class="win-btn win-close" id="lightbox-close" aria-label="Close">×</button>
+            </div>
+        </div>
+        <div class="win-body lightbox-body">
+            <img id="lightbox-img" src="" alt="">
+            <p id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

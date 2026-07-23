@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureNet Intranet | Access Denied</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .denied-titlebar {
+            background: linear-gradient(90deg, #7a0000, #cc3333) !important;
+        }
+        .denied-text {
+            color: var(--accent-error);
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="ctf-page">
+    <div class="win98-window standalone-window">
+        <div class="win-titlebar denied-titlebar">
+            <span class="win-title-text">SECURITY ALERT</span>
+        </div>
+        <div class="win-body">
+            <p class="denied-text">ERROR: INVALID CREDENTIALS</p>
+            <p class="denied-text">ACCESS DENIED.</p>
+            <p>This attempt has been logged by IT Security.</p>
+            <p>If you believe this is an error, please file a ticket with the Help Desk.</p>
+            <p style="margin-top:16px;">
+                <a href="login.html" class="win-link-external">[ Retry Authentication ]</a>
+                &nbsp;&nbsp;
+                <a href="index.html" class="win-link-external">[ Return to Desktop ]</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>
