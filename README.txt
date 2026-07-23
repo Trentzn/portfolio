@@ -1,1 +1,1 @@
-Hi! I am Trenton and I am a Cybersecurity student at USF, I graduate in the spring of 2026!
+Hi! I am Trenton, a Cybersecurity graduate of USF (May 2026), now working as an HPC Systems Administrator I at USF managing the GAIVI cluster!

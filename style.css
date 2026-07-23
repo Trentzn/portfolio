@@ -1,484 +1,798 @@
-@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
-
 :root {
-    --fallout-green: #1aff80;
-    --fallout-green-faded: rgba(26, 255, 128, 0.2);
-    --fallout-bg: #050505;
-    --crt-curve: 5px;
+    --desktop-blue-a: #2b52d6;
+    --desktop-blue-b: #10287a;
+    --desktop-bg: radial-gradient(ellipse at 50% 30%, var(--desktop-blue-a) 0%, var(--desktop-blue-b) 100%);
+
+    --chrome-face: #c0c0c0;
+    --chrome-highlight: #ffffff;
+    --chrome-light-shadow: #dfdfdf;
+    --chrome-shadow: #808080;
+    --chrome-dark-shadow: #000000;
+
+    --titlebar-active-a: #0a246a;
+    --titlebar-active-b: #a6caf0;
+    --titlebar-inactive-a: #7f7f7f;
+    --titlebar-inactive-b: #c0c0c0;
+    --titlebar-text: #ffffff;
+
+    --window-body-bg: #ffffff;
+    --window-text: #000000;
+    --accent-error: #cc0000;
+
+    --font-chrome: Tahoma, "MS Sans Serif", "Segoe UI", Arial, sans-serif;
+    --font-wordmark: "Arial Black", Arial, sans-serif;
 }
 
 * {
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
     margin: 0;
-    padding: 0;
-    cursor: crosshair;
 }
 
 body {
-    background-color: var(--fallout-bg);
-    color: var(--fallout-green);
-    font-family: 'VT323', monospace;
-    font-size: 20px;
-    height: 100vh;
+    font-family: var(--font-chrome);
+    background: var(--desktop-bg);
     overflow: hidden;
-    text-shadow: 0 0 8px var(--fallout-green);
-    animation: text-flicker 0.01s infinite;
 }
 
-@keyframes text-flicker {
-    0% { opacity: 0.99; }
-    100% { opacity: 1; }
-}
+/* ---------- Desktop shell ---------- */
 
-@media (max-width: 600px) {
-    .terminal-container {
-        padding: 10px;
-        margin: 5px;
-    }
-    .terminal-nav {
-        flex-wrap: wrap;
-    }
-    .header-right, .footer-right {
-        display: none;
-    }
-}
-
-/* CRT Effects */
-.crt-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 255, 0, 0.06));
-    background-size: 100% 2px, 3px 100%;
-    pointer-events: none;
-    z-index: 100;
-    animation: flicker 0.15s infinite;
-}
-
-.scanlines {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to bottom,
-        rgba(26, 255, 128, 0) 0%,
-        rgba(26, 255, 128, 0.1) 50%,
-        rgba(26, 255, 128, 0) 100%
-    );
-    background-size: 100% 100px;
-    animation: scanline 10s linear infinite;
-    pointer-events: none;
-    z-index: 99;
-}
-
-@keyframes scanline {
-    0% { transform: translateY(-100%); }
-    100% { transform: translateY(100%); }
-}
-
-.terminal-scratches {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('terminal_scratches.png');
-    background-size: cover;
-    mix-blend-mode: screen;
-    opacity: 0.08; /* Very subtle for realism */
-    pointer-events: none;
-    z-index: 101; /* Above scanlines and CRT overlay */
-}
-
-@keyframes flicker {
-    0% { opacity: 0.97; }
-    5% { opacity: 0.95; }
-    10% { opacity: 0.9; }
-    15% { opacity: 0.95; }
-    20% { opacity: 0.98; }
-    25% { opacity: 0.95; }
-    30% { opacity: 0.9; }
-    35% { opacity: 0.95; }
-    40% { opacity: 0.98; }
-    45% { opacity: 0.95; }
-    50% { opacity: 0.9; }
-    55% { opacity: 0.95; }
-    60% { opacity: 0.98; }
-    65% { opacity: 0.95; }
-    70% { opacity: 0.9; }
-    75% { opacity: 0.95; }
-    80% { opacity: 0.98; }
-    85% { opacity: 0.95; }
-    90% { opacity: 0.9; }
-    95% { opacity: 0.95; }
-    100% { opacity: 0.98; }
-}
-
-.terminal-container {
-    height: calc(100vh - 40px);
+#shell {
     display: flex;
     flex-direction: column;
-    padding: 30px;
-    border: 4px solid var(--fallout-green);
-    margin: 20px;
-    border-radius: 20px;
+    height: 100vh;
+}
+
+#top-bar {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+    padding: 0 10px;
+    background: var(--chrome-face);
+    border-bottom: 2px solid var(--chrome-dark-shadow);
+    font-size: 13px;
+    font-weight: bold;
+    color: #000;
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#mute-btn {
+    background: none;
+    border: none;
+    font-size: 15px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+#clock {
+    font-variant-numeric: tabular-nums;
+}
+
+#desktop {
+    flex: 1 1 auto;
     position: relative;
-    background: radial-gradient(circle at center, rgba(26, 255, 128, 0.1) 0%, transparent 100%), #050505;
-    box-shadow: inset 0 0 50px rgba(26, 255, 128, 0.2), 0 0 20px rgba(26, 255, 128, 0.2);
     overflow: hidden;
 }
 
-/* Glassmorphism effect in terminal */
-.terminal-container::before {
-    content: " ";
-    display: block;
+#wordmark {
     position: absolute;
-    top: 0; left: 0; bottom: 0; right: 0;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 255, 0, 0.03));
-    z-index: 2;
-    background-size: 100% 2px, 3px 100%;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    text-align: center;
     pointer-events: none;
+    z-index: 1;
 }
 
-.terminal-header, .terminal-footer {
+.wordmark-title {
+    font-family: var(--font-wordmark);
+    font-size: clamp(2.5rem, 9vw, 7rem);
+    color: #ffffff;
+    letter-spacing: 2px;
+    line-height: 1;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.wordmark-sub {
+    margin-top: 10px;
+    font-size: clamp(0.7rem, 1.6vw, 1rem);
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+#windows-root {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+#icon-bar {
+    flex: 0 0 auto;
     display: flex;
-    justify-content: space-between;
-    padding: 5px 10px;
-    border-bottom: 2px solid var(--fallout-green);
-    margin-bottom: 20px;
+    gap: 6px;
+    padding: 8px 10px;
+    background: var(--chrome-face);
+    border-top: 2px solid var(--chrome-highlight);
+    overflow-x: auto;
 }
 
-.footer-left {
+/* ---------- Win98 window chrome ---------- */
+
+.win98-window {
+    position: absolute;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    flex-direction: column;
+    min-width: 260px;
+    background: var(--chrome-face);
+    border-top: 2px solid var(--chrome-highlight);
+    border-left: 2px solid var(--chrome-highlight);
+    border-right: 2px solid var(--chrome-dark-shadow);
+    border-bottom: 2px solid var(--chrome-dark-shadow);
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.45);
 }
 
-.footer-link {
-    background: transparent;
-    border: none;
-    color: var(--fallout-green);
-    font-family: inherit;
-    font-size: 1rem;
-    cursor: pointer;
-    text-decoration: underline;
-    opacity: 0.8;
-}
-
-.sub-link {
-    background: transparent;
-    border: none;
-    color: var(--fallout-green);
-    font-family: inherit;
-    font-size: inherit;
-    text-decoration: underline;
-    cursor: pointer;
-    padding: 0;
-    margin: 0;
-    font-weight: bold;
-}
-
-.sub-link:hover, .ctf-link:hover {
-    background: var(--fallout-green);
-    color: var(--fallout-bg);
-}
-
-.ctf-link {
-    color: var(--fallout-green);
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.terminal-nav {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-}
-
-.nav-btn {
-    background: transparent;
-    border: 1px solid var(--fallout-green);
-    color: var(--fallout-green);
-    padding: 5px 15px;
-    font-family: inherit;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.nav-icon {
-    width: 24px;
-    height: 24px;
-    image-rendering: pixelated;
-    mix-blend-mode: screen;
-}
-
-.nav-btn:hover, .nav-btn.active {
-    background: var(--fallout-green);
-    color: var(--fallout-bg);
-    box-shadow: 0 0 15px var(--fallout-green);
-}
-
-.nav-btn:hover .nav-icon, .nav-btn.active .nav-icon {
-    filter: brightness(0); /* Black icons on green background when active */
-}
-
-.terminal-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    padding: 10px;
-}
-
-.page {
+.win98-window.win-hidden {
     display: none;
 }
 
-.page.active {
+.win-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 4px;
+    background: linear-gradient(90deg, var(--titlebar-inactive-a), var(--titlebar-inactive-b));
+    color: var(--titlebar-text);
+    cursor: move;
+    user-select: none;
+    touch-action: none;
+}
+
+.win98-window.is-active .win-titlebar {
+    background: linear-gradient(90deg, var(--titlebar-active-a), var(--titlebar-active-b));
+}
+
+.win-title-icon svg {
+    width: 16px;
+    height: 16px;
     display: block;
 }
 
-.home-banner {
+.win-title-text {
+    flex: 1;
+    font-size: 13px;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.win-controls {
+    display: flex;
+    gap: 3px;
+}
+
+.win-btn {
+    width: 18px;
+    height: 18px;
+    padding: 0;
+    font-size: 12px;
+    font-family: var(--font-chrome);
+    line-height: 1;
+    color: #000;
+    background: var(--chrome-face);
+    border-top: 1px solid var(--chrome-highlight);
+    border-left: 1px solid var(--chrome-highlight);
+    border-right: 1px solid var(--chrome-dark-shadow);
+    border-bottom: 1px solid var(--chrome-dark-shadow);
+    cursor: pointer;
+}
+
+.win-btn:active {
+    border-top: 1px solid var(--chrome-shadow);
+    border-left: 1px solid var(--chrome-shadow);
+    border-right: 1px solid var(--chrome-highlight);
+    border-bottom: 1px solid var(--chrome-highlight);
+}
+
+.win-body {
+    padding: 10px 12px;
+    background: var(--window-body-bg);
+    color: var(--window-text);
+    font-size: 14px;
+    line-height: 1.5;
+    max-height: 360px;
+    overflow-y: auto;
+}
+
+/* ---------- Taskbar / launcher buttons ---------- */
+
+.taskbar-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 64px;
+    padding: 4px 6px;
+    font-family: var(--font-chrome);
+    font-size: 11px;
+    color: #000;
+    background: var(--chrome-face);
+    border-top: 1px solid var(--chrome-highlight);
+    border-left: 1px solid var(--chrome-highlight);
+    border-right: 1px solid var(--chrome-dark-shadow);
+    border-bottom: 1px solid var(--chrome-dark-shadow);
+    cursor: pointer;
+}
+
+.taskbar-btn.is-open {
+    border-top: 1px solid var(--chrome-shadow);
+    border-left: 1px solid var(--chrome-shadow);
+    border-right: 1px solid var(--chrome-highlight);
+    border-bottom: 1px solid var(--chrome-highlight);
+}
+
+.taskbar-btn.is-focused {
+    outline: 1px dotted #000;
+    outline-offset: -3px;
+}
+
+.taskbar-icon svg {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+/* ---------- Window content ---------- */
+
+.section-header {
+    font-weight: bold;
+    color: #0a246a;
+    margin: 10px 0 4px;
+}
+
+.section-header:first-child {
+    margin-top: 0;
+}
+
+.line {
+    margin: 1px 0;
+}
+
+.line-spacer {
+    height: 6px;
+}
+
+.profile-card {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-bottom: 30px;
-    border-bottom: 2px solid var(--fallout-green-faded);
-    padding-bottom: 20px;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
-.profile-img {
-    width: 200px;
-    height: 250px;
+.profile-thumb {
+    width: 56px;
+    height: 56px;
     object-fit: cover;
-    border: 3px solid var(--fallout-green);
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(26, 255, 128, 0.4);
-    /* No heavy sepia filter to maintain professional cinematic color grading */
-    margin-right: 10px;
+    border: 2px solid var(--chrome-shadow);
 }
 
-.main-title {
-    font-size: 3.5rem;
-    margin: 0;
-    line-height: 1;
-    letter-spacing: 2px;
+.profile-name {
+    font-weight: bold;
 }
 
-.sub-title {
-    font-size: 1.5rem;
-    opacity: 0.8;
+.profile-role {
+    font-size: 12px;
+    color: #333;
 }
 
-.typing-container {
-    white-space: pre-wrap;
-    line-height: 1.4;
-    position: relative;
-    font-size: 1.2rem;
+.project-entry {
+    margin-bottom: 14px;
 }
 
-/* Make the first few lines of boot text (the banner) stand out if we used CSS but we used text stars */
-/* We can add a glow effect to specific terms if we want, but sticking to text stars for now */
+.project-entry:last-child {
+    margin-bottom: 0;
+}
 
-.cursor {
+.project-title {
+    font-weight: bold;
+}
+
+.project-status {
+    float: right;
+    font-size: 11px;
+    padding: 1px 5px;
+    color: #fff;
+}
+
+.project-status.status-active {
+    background: #1a7a3a;
+}
+
+.project-status.status-progress {
+    background: #b8720a;
+}
+
+.project-status.status-done {
+    background: #0a246a;
+}
+
+.project-desc {
+    font-size: 13px;
+    margin: 4px 0;
+}
+
+.win-link,
+.win-link-external {
     display: inline-block;
-    width: 10px;
-    background-color: var(--fallout-green);
-    animation: blink 0.8s infinite;
+    margin-top: 4px;
+    padding: 0;
+    font-family: inherit;
+    font-size: 13px;
+    color: #0a246a;
+    text-decoration: underline;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+.back-link {
+    display: block;
+    margin-top: 12px;
 }
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
-    padding: 20px 0;
+.exp-entry {
+    margin-bottom: 14px;
 }
 
-.gallery-item {
-    border: 1px solid var(--fallout-green);
+.exp-entry:last-child {
+    margin-bottom: 0;
+}
+
+.exp-title {
+    font-weight: bold;
+}
+
+.exp-sub {
+    font-size: 12px;
+    color: #444;
+    margin-bottom: 4px;
+}
+
+.exp-entry ul {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.exp-entry li {
+    font-size: 13px;
+}
+
+.thumb-row {
+    display: flex;
+    gap: 8px;
+    margin: 10px 0;
+    flex-wrap: wrap;
+}
+
+.thumb {
+    width: 100px;
+    height: 75px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid var(--chrome-shadow);
+}
+
+.thumb:hover {
+    border-color: #0a246a;
+}
+
+.msg-field {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+.msg-label {
+    font-weight: bold;
+    margin-right: 4px;
+}
+
+.msg-note {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #333;
+}
+
+/* ---------- Popup ads (garish content, uniform chrome) ---------- */
+
+.win-body.popup-body-flush {
+    padding: 0;
+    background: transparent;
+    max-height: none;
+    overflow: visible;
+}
+
+.popup-congrats {
+    padding: 16px;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    background: linear-gradient(135deg, #ff00cc, #3333ff, #00e5ff);
+    background-size: 300% 300%;
+    animation: popup-gradient-shift 6s ease infinite;
+}
+
+@keyframes popup-gradient-shift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.popup-congrats-headline {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.popup-congrats-sub {
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.popup-3d-btn {
+    background: #3fae4a;
+    color: #04240a;
+    font-family: var(--font-chrome);
+    font-weight: bold;
+    font-size: 14px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-top: 3px solid #9be8a0;
+    border-left: 3px solid #9be8a0;
+    border-right: 3px solid #14401a;
+    border-bottom: 3px solid #14401a;
+}
+
+.popup-3d-btn:active {
+    border-top: 3px solid #14401a;
+    border-left: 3px solid #14401a;
+    border-right: 3px solid #9be8a0;
+    border-bottom: 3px solid #9be8a0;
+}
+
+.popup-3d-btn:disabled {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.prize-reveal {
+    margin-top: 12px;
+    background: rgba(255, 255, 255, 0.92);
+    color: #111;
+    text-shadow: none;
     padding: 10px;
-    background: rgba(26, 255, 128, 0.05);
+    text-align: left;
+    font-size: 13px;
+}
+
+.prize-reveal p {
+    margin: 0 0 8px;
+}
+
+.prize-reveal.is-hidden {
+    display: none;
+}
+
+.popup-marquee {
+    background: #000000;
+    overflow: hidden;
+    padding: 12px 0;
+}
+
+.popup-marquee-track {
+    display: inline-block;
+    white-space: nowrap;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    font-size: 16px;
+    color: #ffe600;
+    text-shadow: 0 0 6px #00e5ff, 0 0 2px #ffffff;
+    animation: popup-marquee-scroll 14s linear infinite;
+}
+
+@keyframes popup-marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+.popup-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    background: #000000;
+    padding: 8px;
+}
+
+.popup-grid-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    border: 2px solid #222222;
+    animation-name: popup-bounce;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+@keyframes popup-bounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-8px) scale(1.08); }
+}
+
+/* ---------- Retro desktop badge ---------- */
+
+#best-viewed-badge {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    z-index: 1;
+    padding: 6px 10px;
+    background: var(--chrome-face);
+    color: #0a246a;
+    font-family: var(--font-chrome);
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 1.3;
+    text-align: center;
+    border-top: 2px solid var(--chrome-highlight);
+    border-left: 2px solid var(--chrome-highlight);
+    border-right: 2px solid var(--chrome-dark-shadow);
+    border-bottom: 2px solid var(--chrome-dark-shadow);
+    pointer-events: none;
+    transform: rotate(-2deg);
+}
+
+/* ---------- Decorative background desktop icons ---------- */
+
+#desktop-icons {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    width: 76px;
+    padding: 4px;
+    background: none;
+    border: 1px dotted transparent;
+    cursor: pointer;
+}
+
+.desktop-icon-glyph svg {
+    width: 36px;
+    height: 36px;
+    display: block;
+    filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.5));
+}
+
+.desktop-icon-label {
+    font-size: 11px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #000000, 0 0 3px #000000;
+    text-align: center;
+    line-height: 1.2;
+}
+
+.desktop-icon.is-selected {
+    background: rgba(10, 36, 106, 0.45);
+    border: 1px dotted #ffffff;
+}
+
+.desktop-icon.is-selected .desktop-icon-label {
+    background: #0a246a;
+}
+
+.desktop-icon.wiggle {
+    animation: desktop-icon-wiggle 0.4s ease;
+}
+
+@keyframes desktop-icon-wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-8deg); }
+    75% { transform: rotate(8deg); }
+}
+
+/* ---------- Desktop buddy ---------- */
+
+#desk-buddy {
+    position: absolute;
+    left: 18px;
+    bottom: 70px;
+    z-index: 50;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.buddy-char {
+    width: 56px;
+    cursor: pointer;
+    animation: buddy-bob 2.6s ease-in-out infinite;
+}
+
+.buddy-char svg {
+    width: 100%;
+    display: block;
+}
+
+@keyframes buddy-bob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-6px) rotate(2deg); }
+}
+
+.buddy-bubble {
+    position: relative;
+    max-width: 200px;
+    padding: 8px 20px 8px 8px;
+    font-size: 12px;
+    color: #000000;
+    background: var(--chrome-face);
+    border-top: 1px solid var(--chrome-highlight);
+    border-left: 1px solid var(--chrome-highlight);
+    border-right: 1px solid var(--chrome-dark-shadow);
+    border-bottom: 1px solid var(--chrome-dark-shadow);
+    box-shadow: inset 1px 1px 0 var(--chrome-light-shadow), inset -1px -1px 0 var(--chrome-shadow);
+}
+
+.buddy-bubble::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    bottom: -8px;
+    border-width: 8px 6px 0 6px;
+    border-style: solid;
+    border-color: var(--chrome-shadow) transparent transparent transparent;
+}
+
+.buddy-bubble p {
+    margin: 0;
+}
+
+.buddy-bubble.is-hidden {
+    display: none;
+}
+
+.buddy-bubble-close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+/* ---------- Lightbox ---------- */
+
+#lightbox-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 9998;
+}
+
+#lightbox-backdrop.win-hidden {
+    display: none;
+}
+
+.lightbox-window {
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(90vw, 480px);
+    z-index: 9999;
+}
+
+.lightbox-body {
     text-align: center;
 }
 
-.gallery-item img {
-    width: 100%;
-    filter: sepia(100%) hue-rotate(90deg) brightness(1.2) contrast(1.2);
-    border-bottom: 1px solid var(--fallout-green);
-    margin-bottom: 5px;
-}
-
-.gallery-item p {
-    font-size: 0.9rem;
-    margin: 0;
-}
-::-webkit-scrollbar {
-    width: 10px;
-}
-::-webkit-scrollbar-track {
-    background: var(--fallout-bg);
-}
-.resume-header {
-    background-color: var(--fallout-green);
-    color: var(--fallout-bg);
-    padding: 2px 10px;
-    margin: 15px 0 5px 0;
-    font-weight: bold;
-    display: inline-block;
-    text-shadow: none;
-}
-::-webkit-scrollbar-thumb {
-    background: var(--fallout-green);
-}
-.log-gallery {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin: 15px 0;
-}
-
-.log-img {
-    max-width: 150px; /* Force thumbnails in logs */
-    height: auto;
-    display: inline-block;
-    border: 1px solid var(--fallout-green);
-    filter: sepia(100%) hue-rotate(90deg) brightness(1.1) contrast(1.1);
-    box-shadow: 0 0 5px var(--fallout-green-faded);
-    cursor: zoom-in;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.gallery-item img {
-    cursor: zoom-in;
-    transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.log-img:hover, .gallery-item img:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px var(--fallout-green);
-}
-
-/* Modal System */
-.modal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.9);
-    z-index: 200;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-}
-
-.modal.active {
-    display: flex;
-}
-
-.modal-content {
-    background: var(--fallout-bg);
-    border: 3px solid var(--fallout-green);
-    max-width: 90%;
-    max-height: 90%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-shadow: 0 0 30px var(--fallout-green-faded);
-    position: relative;
-}
-
-.modal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    overflow-y: auto;
-}
-
-.modal-body img {
+.lightbox-body img {
     max-width: 100%;
-    max-height: 70vh;
-    border: 1px solid var(--fallout-green);
-    /* Reduced filter for readability in modal */
-    filter: sepia(50%) hue-rotate(90deg) brightness(1.2);
+    max-height: 50vh;
+    border: 2px solid var(--chrome-shadow);
 }
 
-.modal-body .typing-container {
-    width: 100%;
-    border-top: 1px solid var(--fallout-green-faded);
-    padding-top: 15px;
+#lightbox-caption {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #333;
 }
 
-.terminal-underlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 0;
-    overflow: hidden;
+/* ---------- CTF standalone pages (login/flag/access-denied) ---------- */
+
+body.ctf-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
 }
 
-.layer-dirt {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url('terminal_scratches.png');
-    background-size: cover;
-    opacity: 0.12;
-    mix-blend-mode: screen;
+.standalone-window {
+    position: static !important;
+    width: min(92vw, 480px);
 }
 
-.layer-data-stream {
-    position: absolute;
-    top: 0;
-    right: 5%;
-    width: 300px;
-    height: 100%;
-    color: var(--fallout-green);
-    font-size: 0.8rem;
-    opacity: 0.08;
-    overflow: hidden;
-    white-space: pre;
-    line-height: 1.2;
-    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-}
+/* ---------- Mobile: stack windows in flow, disable dragging ---------- */
 
-.data-scroll {
-    animation: stream-scroll 60s linear infinite;
-}
+@media (max-width: 860px) {
+    body {
+        overflow: auto;
+    }
 
-@keyframes stream-scroll {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-50%); }
-}
+    #desktop {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 
-.layer-watermark {
-    position: absolute;
-    bottom: 15%;
-    right: 20%;
-    width: 400px;
-    height: 400px;
-    background: url('robco_watermark.png') no-repeat center;
-    background-size: contain;
-    opacity: 0.06;
-    mix-blend-mode: screen;
-}
+    #wordmark {
+        position: static;
+        transform: none;
+        width: auto;
+        margin: 20px auto 10px;
+    }
 
-/* Ensure foreground content is above underlays */
-.terminal-header, .terminal-nav, .terminal-content, .terminal-footer {
-    position: relative;
-    z-index: 5;
+    #windows-root {
+        position: static;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 0 12px 24px;
+    }
+
+    .win98-window {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: 480px;
+    }
+
+    .win-titlebar {
+        cursor: default;
+    }
+
+    #icon-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .lightbox-window {
+        width: min(94vw, 480px);
+    }
+
+    #best-viewed-badge,
+    #desktop-icons,
+    #desk-buddy {
+        display: none;
+    }
 }
