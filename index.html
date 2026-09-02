@@ -130,7 +130,7 @@
     border-radius: 4px; padding: 0.8rem 1rem; margin: 1.4rem 0 0;
     overflow-x: auto; color: var(--muted);
   }
-  .queue b { color: var(--green); font-weight: 700; display: block; margin-bottom: 0.15rem; }
+  .queue b { color: var(--green); font-weight: 700; }
   .queue .r { color: var(--green-ink); }
   .queue .p { color: var(--gold-ink); }
 
@@ -254,39 +254,30 @@
     </div>
 
     <p class="lede">
-      Since June 2026 I have helped run <strong>GAIVI</strong>, the research computing cluster behind
+      Since June 2026 I have helped run manage and configure USF's GAIVI, the research computing cluster behind
       USF's AI, computer vision, and machine learning work.
     </p>
 
     <p>
       Most of my time goes to building out <strong>GAIVI 3.0</strong>, USF's next-generation Slurm
-      compute cluster. It is a ground-up rebuild rather than an incremental upgrade: new GPU compute
-      nodes, a reworked Slurm control plane, and a partition, QoS, and fair-share layout designed so a
-      few large training jobs can't starve the long tail of smaller research workloads.
+      compute cluster. It is a ground-up rebuild rather than an incremental upgrade of the existing GAIVI2.0 infrastructure.
     </p>
 
     <p>
-      Day to day that means provisioning and imaging nodes, standardizing the software environment
-      researchers actually land in, writing the scheduling policy and the job scripts that exercise it,
-      and validating the whole path — login node to allocation to GPU — before it carries real work.
-      Alongside the build I keep the current cluster healthy: triaging failed jobs, tuning resource
-      allocation, and onboarding new research groups.
+      Most of my day is split between keeping the GPU cluster running smoothly — user issues, job scheduling, node problems — and the quieter infrastructure work underneath it all like patching, hardening, and networking
     </p>
 
     <ul class="bullets">
       <li>Building out GAIVI 3.0 — node provisioning, Slurm control-plane configuration, and scheduling policy.</li>
-      <li>Design and maintain partitions, QoS tiers, and fair-share accounting so GPU capacity is shared predictably across research groups.</li>
+      <li>Architecturing and implementing a stateless OS over network for evert GPU node</li>
       <li>Administer the existing GAIVI cluster: job triage, resource allocation, and user onboarding.</li>
-      <li>Automate routine cluster administration and health checks with Bash and Python.</li>
+      <li>Automate routine cluster administration and health checks with Bash, Slurm, and Python.</li>
     </ul>
 
-    <div class="queue" aria-label="Example Slurm queue output">
-      <b>$ squeue --partition=gpu --format="%.8i %.9P %.10u %.8T %.10M %.4C %R"</b>
-      <span>&nbsp;&nbsp;JOBID&nbsp;&nbsp;PARTITION&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;USER&nbsp;&nbsp;&nbsp;&nbsp;STATE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TIME&nbsp;CPUS&nbsp;NODELIST</span><br>
-      <span class="r">&nbsp;1048214&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gpu&nbsp;&nbsp;&nbsp;&nbsp;vision-lab&nbsp;&nbsp;RUNNING&nbsp;&nbsp;&nbsp;2-04:11&nbsp;&nbsp;&nbsp;32&nbsp;gaivi-g[04-07]</span><br>
-      <span class="r">&nbsp;1048301&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gpu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;nlp-grad&nbsp;&nbsp;RUNNING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6:42&nbsp;&nbsp;&nbsp;&nbsp;8&nbsp;gaivi-g11</span><br>
-      <span class="p">&nbsp;1048355&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gpu&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bio-hpc&nbsp;&nbsp;PENDING&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0:00&nbsp;&nbsp;&nbsp;16&nbsp;(Resources)</span>
-    </div>
+    <pre class="queue" aria-label="Slurm queue: GAIVI 2.0 running, GAIVI 3.0 pending"><b>$ squeue --partition=gpu --format="%.8i %.9P %.10j %.9u %.8T %.12M %.5D %R"</b>
+   JOBID PARTITION       NAME      USER    STATE         TIME NODES NODELIST(REASON)
+<span class="r"> 1204877       gpu   GAIVI2.0   thorner  RUNNING 402-11:37:04    16 gaivi-g[01-16]</span>
+<span class="p"> 1204878       gpu   GAIVI3.0   thorner  PENDING         0:00    24 (Dependency)</span></pre>
   </section>
 
   <section id="projects">
@@ -339,8 +330,7 @@
         <span class="when">May 2025 — Present</span>
       </div>
       <p>
-        One hand-written HTML file. No build step, no framework, no web fonts, no JavaScript — the USF
-        bull above is inline vector, and the only downloads are four photographs.
+        You're here!
       </p>
     </div>
   </section>
@@ -377,7 +367,7 @@
       <dt>HPC</dt>
       <dd>Slurm, job scheduling, resource allocation, GPU cluster administration</dd>
       <dt>Systems</dt>
-      <dd>Linux (Ubuntu, Kali, Parrot), Unix, Windows, VMware</dd>
+      <dd>Linux (Ubuntu, RHEL, Proxmox VE), Unix, Windows, VMware</dd>
       <dt>Languages</dt>
       <dd>Bash, Python, C, SQL, KQL, HTML, CSS</dd>
       <dt>Security</dt>
@@ -387,7 +377,6 @@
 
   <footer>
     <span>Tampa, FL · <a href="mailto:trentonhorner@usf.edu">trentonhorner@usf.edu</a></span>
-    <span>Go Bulls 🤘</span>
   </footer>
 
 </main>
